@@ -1,22 +1,16 @@
 import React, {useContext} from "react";
+import SearchBox from "../components/SearchBox";
 import "../styles/SearchBox.css";
 
-const SearchBox = () => {
-    const context = useContext(DataAreaContext);
 
+const Nav = () => {
     return (
-        <div className="SearchBox">
-            <form className= "form-inline">
-                <input
-                    className="form-control"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                    onChange={e => handleSearchChange(e)}
-                />
-            </form>
-        </div>
+        <nav className="navbar navbar-exand-lg navbar-light bg-white">
+            <div className="search-box">
+                <SearchBox />
+            </div>
+        </nav>
     );
 }
 
-export default SearchBox;
+export default Nav;
