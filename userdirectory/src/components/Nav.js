@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React from "react";
 import SearchBox from "../components/SearchBox";
 import "../styles/SearchBox.css";
 
