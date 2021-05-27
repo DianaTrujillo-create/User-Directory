@@ -1,4 +1,4 @@
-import react, {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import API from "../utils/API";
 import DataAreaContext from "../utils/DataAreaContext";
 import Nav from "../components/Nav";
@@ -56,5 +56,50 @@ const DataArea = () => {
         }
 
         const sortUsers = developerState.filteredUsers.sort(compareFx);
-    }
+
+        setDeveloperState({
+            ...developerState,
+            filteredUsers: sortedUsers
+        });
+
+    };
+
+const handleSearchChange = event => {
+    const filter = event.target.value;
+    const filteredList = developerState.users.filter(item => 
+    {
+        let values = item.name.first.toLowerCase();
+        return values.index(filter.toLowerCase()) !== -1;
+    });
+
+    setDeveloperState({
+        ...developerState,
+        filteredUsers: filteredList});        
+        };
+
+        useEffect(() => {
+            API.getUsers()
+            .then(results => {
+                setDeveloperState({
+                    ...developerState,
+                    Users: results.data.results,
+                    filteredUsers: results.data.results
+                });
+            });
+        }, []);
+    
+    return (
+        <DataAreaContext.Provider
+        value={{ developerState, handleSearchChange, handleSort }} >
+            <Nav />
+            <div className="data-area">
+                {developerState.filteredUsers.length > 0
+    ? <DataTable /> 
+     : <div></div> 
+     }
+         </div>
+        </DataAreaContext.Provider>
+    );
 }
+
+export default DataArea;
