@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/DianaTrujillo-create/User-Directory/issues"
   },
-  "homepage": "https://github.com/DianaTrujillo-create/User-Directory#readme"
+  "homepage": "https://github.com/DianaTrujillo-create/User-Directory#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
