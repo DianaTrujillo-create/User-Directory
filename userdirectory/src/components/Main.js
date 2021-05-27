@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import DataArea from "./DataArea";
+import React from "react";
+import DataArea from "../components/DataArea";
 import "../styles/Main.css";
 
 const Main = () => {
