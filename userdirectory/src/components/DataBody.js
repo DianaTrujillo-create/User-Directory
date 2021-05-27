@@ -1,19 +1,21 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import DataAreaContext from "../utils/DataAreaContext";
 import "../styles/DataBody.css";
 
-const DataBody = () => {
-    const context = useContext(DataAreaContext);
 
-    function formatDate(date2) {
-        const dateArray= date2.split("-");
-        const year = dateArray[0];
-        const month = dateArray[1];
-        const date = dateArray[2].split("T");
-        const day = date[0];
-        const DOB = [month, day, year].join("-");
-        return DOB;
-    }
+
+const DataBody = () => {
+const context = useContext(DataAreaContext)
+
+function formatDate(date2) {
+    const dateArray= date2.split("-");
+    const year = dateArray[0];
+    const month = dateArray[1];
+    const date = dateArray[2].split("T");
+    const day = date[0];
+    const DOB = [month, day, year].join("-");
+    return DOB;
+}
 
     return (
         <tbody>
@@ -47,7 +49,9 @@ const DataBody = () => {
                 <></>
             )}
         </tbody>
-        );
+    );
+    
+
 }
 
 export default DataBody;

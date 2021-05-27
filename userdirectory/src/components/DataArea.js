@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from "react";
 import API from "../utils/API";
 import DataAreaContext from "../utils/DataAreaContext";
+import "../styles/DataArea.css";
 import Nav from "../components/Nav";
 import DataTable from "../components/DataTable";
 
 const DataArea = () => {
  
     const [developerState, setDeveloperState] = useState({
-        user: [], 
+        users: [], 
         order: "ascend",
         filteredUsers: [],
         headings: [
@@ -40,31 +41,31 @@ const DataArea = () => {
                 } else if (heading === "name") {
                     return a[heading].first.localeCompare(b[heading].first);
                 } else {
-                    return b[heading] - a[heading];
+                    return a[heading] - b[heading];
                 }
             } else {
-            if (a[heading] === undefined){
-                return 1;
-            } else if (b[heading] === undefined){
-                return -1;
-            } else if (heading ==="name"){
-                return b[heading].first.localeCompare(a[heading].first);
-            } else {
-                return b[heading]- a[heading];
+                if (a[heading] === undefined){
+                    return 1;
+                } else if (b[heading] === undefined){
+                    return -1;
+                } else if (heading ==="name"){
+                    return b[heading].first.localeCompare(a[heading].first);
+                } else {
+                    return b[heading]- a[heading];
+                }
             }
         }
-        }
 
-        const sortUsers = developerState.filteredUsers.sort(compareFx);
-
-        setDeveloperState({
+        const sortedUsers = developerState.filteredUsers.sort(compareFx);
+        setDeveloperState({ 
             ...developerState,
             filteredUsers: sortedUsers
         });
 
-    };
+    }
 
 const handleSearchChange = event => {
+    console.log(event.target.value);
     const filter = event.target.value;
     const filteredList = developerState.users.filter(item => 
     {
@@ -75,18 +76,18 @@ const handleSearchChange = event => {
     setDeveloperState({
         ...developerState,
         filteredUsers: filteredList});        
-        };
+} 
 
-        useEffect(() => {
-            API.getUsers()
-            .then(results => {
-                setDeveloperState({
-                    ...developerState,
-                    Users: results.data.results,
-                    filteredUsers: results.data.results
-                });
+    useEffect(() => {
+        API.getUsers()
+        .then(results => {
+            setDeveloperState({
+                ...developerState,
+                users: results.data.results,
+                filteredUsers: results.data.results
             });
-        }, []);
+        });
+    });  
     
     return (
         <DataAreaContext.Provider
